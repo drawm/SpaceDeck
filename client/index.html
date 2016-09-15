@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" class="fullscreen">
+<style type="text/css">
+    .fullscreen {
+        margin:0px;
+        padding:0px;
+        width:100%;
+        height:100%;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Space Deck</title>
+    <script>
+        function onLoad() {
+            const graphic = document.getElementById('canvas').getContext('2d');
+            const renderWithState = (event, state)=> {
+                graphic.clearRect(0, 0, window.width, window.height);
+                graphic.fillRect(state.state.ship.transform.x, state.state.ship.transform.y, 5, 10);
+            };
+
+            const ipc = require('electron').ipcRenderer;
+            ipc.on('changeState', renderWithState.bind(this));
+            ipc.send('boot', null);
+        }
+    </script>
+</head>
+<body onload="onLoad()" class="fullscreen">
+<canvas id="canvas" class="fullscreen"></canvas>
+</body>
+</html>
