@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Deck</title>
+    <script>
+        function onLoad() {
+            const graphic = document.getElementById('canvas').getContext('2d');
+            const renderWithState = (state)=> {
+                console.log(state);
+                graphic.fillRect(state.state.ship.x, state.state.ship.y, 50, 50);
+            };
+
+
+            const ipc = require('electron').ipcRenderer;
+            ipc.on('changeState', renderWithState.bind(this));
+            ipc.send('boot', null);
+        }
+    </script>
+</head>
+<body onload="onLoad()">
+<canvas id="canvas" width="100%" height="100%"></canvas>
+</body>
+</html>
