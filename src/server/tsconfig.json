@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"outDir": "./../../bin/server/",
+		"sourceMap": true,
+		"module": "commonjs",
+		"target": "es6",
+		"jsx": "react"
+	},
+	"files": [
+		"../../typings/index.d.ts",
+		"./Server.ts",
+		"../shared/IShip.d.ts",
+		"../shared/messages/IMessage.d.ts",
+		"../shared/Player.d.ts"
+	]
+}

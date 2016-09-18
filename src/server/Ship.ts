@@ -1,4 +1,7 @@
-class Ship {
+export default class Ship implements IShip {
+    public maxEnergy:number;
+    public health:number;
+    public transform: {x:number, y:number, rotation:number};
     constructor() {
         this.maxEnergy = 1;
         this.transform = {x: 0, y: 0, rotation: 0};
@@ -16,4 +19,3 @@ class Ship {
         },200);
     }
 }
-module.exports = Ship;

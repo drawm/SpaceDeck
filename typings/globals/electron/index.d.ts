@@ -142,13 +142,13 @@ declare namespace Electron {
 			callback: (trust: boolean) => void
 		) => void): this;
 		/**
-		 * Emitted when a client certificate is requested.
+		 * Emitted when a app certificate is requested.
 		 *
-		 * The url corresponds to the navigation entry requesting the client certificate
+		 * The url corresponds to the navigation entry requesting the app certificate
 		 * and callback needs to be called with an entry filtered from the list.
 		 * Using event.preventDefault() prevents the application from using the first certificate from the store.
 		 */
-		on(event: 'select-client-certificate', listener: (event: Event,
+		on(event: 'select-app-certificate', listener: (event: Event,
 			webContents: WebContents,
 			url: string,
 			certificateList: Certificate[],
@@ -728,11 +728,11 @@ declare namespace Electron {
 		 */
 		getSize(): number[];
 		/**
-		 * Resizes the window's client area (e.g. the web page) to width and height.
+		 * Resizes the window's app area (e.g. the web page) to width and height.
 		 */
 		setContentSize(width: number, height: number, animate?: boolean): void;
 		/**
-		 * @returns The window's client area's width and height.
+		 * @returns The window's app area's width and height.
 		 */
 		getContentSize(): number[];
 		/**
@@ -1545,7 +1545,7 @@ declare namespace Electron {
 		/**
 		 * You are required to call this method before using other crashReporter APIs.
 		 *
-		 * Note: On OS X, Electron uses a new crashpad client, which is different from breakpad
+		 * Note: On OS X, Electron uses a new crashpad app, which is different from breakpad
 		 * on Windows and Linux. To enable the crash collection feature, you are required to call
 		 * the crashReporter.start API to initialize crashpad in the main process and in each
 		 * renderer process from which you wish to collect crash reports.
@@ -3249,10 +3249,10 @@ declare namespace Electron {
 			callback: (trust: boolean) => void
 		) => void): this;
 		/**
-		 * Emitted when a client certificate is requested.
-		 * The usage is the same with the "select-client-certificate" event of app.
+		 * Emitted when a app certificate is requested.
+		 * The usage is the same with the "select-app-certificate" event of app.
 		 */
-		on(event: 'select-client-certificate', listener: (event: Event,
+		on(event: 'select-app-certificate', listener: (event: Event,
 			url: string,
 			certificateList: Certificate[],
 			callback: (certificate: Certificate) => void

@@ -28,7 +28,7 @@ class Client {
         this.mainWindow = new BrowserWindow({width: 800, height: 600});
 
         // and load the index.html of the app.
-        this.mainWindow.loadURL(`file://${__dirname}/index.html`);
+        this.mainWindow.loadURL(`file://${__dirname}/bin/app/index.html`);
 
         // Open the DevTools.
         this.mainWindow.webContents.openDevTools();
@@ -43,6 +43,9 @@ class Client {
 
         electron.ipcMain.on('boot', (event, data)=> {
             let state = {};
+            const reduce = (newState)=> {
+                state = Object.assign(state, newState);
+            };
 
             const client = new net.Socket();
             client.connect(1337, '127.0.0.1', function () {
@@ -51,19 +54,21 @@ class Client {
             });
 
             client.on('data', (stringData) => {
-                state = stringData.toString()
+                const messages = stringData.toString()
                     .split('\r\n')
                     .filter(value => !!value)
-                    .map(JSON.parse)
-                    .filter(value => !!value.state)
-                    .reduce(Object.assign);
+                    .map(JSON.parse);
+
+                messages.forEach((message)=>reduce(message));
+
                 event.sender.send('changeState', state);
             });
 
-            client.on('close', function () {
+            client.on('close', () => {
             });
         });
     }
-};
+}
+
 
 new Client();
