@@ -4,9 +4,10 @@
   "description": "Space Deck's server",
   "main": "index.js",
   "scripts": {
-    "client": "electron client/Client.js",
-    "server": "node server/Server.js",
-    "test": "test"
+
+    "client": "webpack --config webpack.client.js && electron client.js",
+    "start": "tsc -p src/server/ && node bin/server/server/Server.js",
+    "test": "echo 'TO IMPLEMENT'"
   },
   "author": "Damon Perron-Laurin",
   "license": "ISC",

@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"outDir": "./../bin/",
+		"outDir": "./../../bin/client/",
 		"sourceMap": true,
 		"module": "commonjs",
 		"target": "es6",

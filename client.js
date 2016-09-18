@@ -2,6 +2,8 @@ const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 const net = require('net');
 
+const server = require('./bin/server/server/Server');
+
 
 class Client {
 
@@ -27,8 +29,8 @@ class Client {
         // Create the browser window.
         this.mainWindow = new BrowserWindow({width: 800, height: 600});
 
-        // and load the index.html of the app.
-        this.mainWindow.loadURL(`file://${__dirname}/bin/app/index.html`);
+        // and load the index.html of the client.
+        this.mainWindow.loadURL(`file://${__dirname}/bin/client/index.html`);
 
         // Open the DevTools.
         this.mainWindow.webContents.openDevTools();
@@ -36,16 +38,12 @@ class Client {
         // Emitted when the window is closed.
         this.mainWindow.on('closed', function () {
             // Dereference the window object, usually you would store windows
-            // in an array if your app supports multi windows, this is the time
+            // in an array if your client supports multi windows, this is the time
             // when you should delete the corresponding element.
             this.mainWindow = null;
         });
 
         electron.ipcMain.on('boot', (event, data)=> {
-            let state = {};
-            const reduce = (newState)=> {
-                state = Object.assign(state, newState);
-            };
 
             const client = new net.Socket();
             client.connect(1337, '127.0.0.1', function () {
@@ -59,9 +57,9 @@ class Client {
                     .filter(value => !!value)
                     .map(JSON.parse);
 
-                messages.forEach((message)=>reduce(message));
-
-                event.sender.send('changeState', state);
+                messages.forEach((message)=>{
+                    event.sender.send('changeState', message);
+                });
             });
 
             client.on('close', () => {

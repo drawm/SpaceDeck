@@ -72,7 +72,7 @@ declare namespace Electron {
 		 * Emitted when all windows have been closed.
 		 *
 		 * This event is only emitted when the application is not going to quit.
-		 * If the user pressed Cmd + Q, or the developer called app.quit(),
+		 * If the user pressed Cmd + Q, or the developer called client.quit(),
 		 * Electron will first try to close all the windows and then emit the will-quit event,
 		 * and in this case the window-all-closed event would not be emitted.
 		 */
@@ -142,13 +142,13 @@ declare namespace Electron {
 			callback: (trust: boolean) => void
 		) => void): this;
 		/**
-		 * Emitted when a app certificate is requested.
+		 * Emitted when a client certificate is requested.
 		 *
-		 * The url corresponds to the navigation entry requesting the app certificate
+		 * The url corresponds to the navigation entry requesting the client certificate
 		 * and callback needs to be called with an entry filtered from the list.
 		 * Using event.preventDefault() prevents the application from using the first certificate from the store.
 		 */
-		on(event: 'select-app-certificate', listener: (event: Event,
+		on(event: 'select-client-certificate', listener: (event: Event,
 			webContents: WebContents,
 			url: string,
 			certificateList: Certificate[],
@@ -195,7 +195,7 @@ declare namespace Electron {
 		exit(exitCode: number): void;
 		/**
 		 * On Linux, focuses on the first visible window.
-		 * On OS X, makes the application the active app.
+		 * On OS X, makes the application the active client.
 		 * On Windows, focuses on the application’s first window.
 		 */
 		focus(): void;
@@ -223,11 +223,11 @@ declare namespace Electron {
 		 * If the path specifies a directory that does not exist, the directory will
 		 * be created by this method. On failure an Error would throw.
 		 *
-		 * You can only override paths of names defined in app.getPath.
+		 * You can only override paths of names defined in client.getPath.
 		 *
 		 * By default web pages' cookies and caches will be stored under userData
 		 * directory, if you want to change this location, you have to override the
-		 * userData path before the ready event of app module gets emitted.
+		 * userData path before the ready event of client module gets emitted.
 		 */
 		setPath(name: AppPathName, path: string): void;
 		/**
@@ -272,14 +272,14 @@ declare namespace Electron {
 		 * The whole link, including protocol, will be passed to your application as a parameter.
 		 *
 		 * Note: This is only implemented on OS X and Windows.
-		 *       On OS X, you can only register protocols that have been added to your app's info.plist.
+		 *       On OS X, you can only register protocols that have been added to your client's info.plist.
 		 */
 		setAsDefaultProtocolClient(protocol: string): void;
 		/**
 		 * Removes the current executable as the default handler for a protocol (aka URI scheme).
 		 *
 		 * Note: This API is only available on Windows.
-		 *       On OS X, removing the app will automatically remove the app as the default protocol handler.
+		 *       On OS X, removing the client will automatically remove the client as the default protocol handler.
 		 */
 		removeAsDefaultProtocolClient(protocol: string): void;
 		/**
@@ -298,8 +298,8 @@ declare namespace Electron {
 		allowNTLMCredentialsForAllDomains(allow: boolean): void;
 		/**
 		 * This method makes your application a Single Instance Application instead of allowing
-		 * multiple instances of your app to run, this will ensure that only a single instance
-		 * of your app is running, and other instances signal this instance and exit.
+		 * multiple instances of your client to run, this will ensure that only a single instance
+		 * of your client is running, and other instances signal this instance and exit.
 		 */
 		makeSingleInstance(callback: (args: string[], workingDirectory: string) => boolean): boolean;
 		/**
@@ -473,7 +473,7 @@ declare namespace Electron {
 		 */
 		checkForUpdates(): void;
 		/**
-		 * Restarts the app and installs the update after it has been downloaded.
+		 * Restarts the client and installs the update after it has been downloaded.
 		 * It should only be called after update-downloaded has been emitted.
 		 */
 		quitAndInstall(): void;
@@ -572,7 +572,7 @@ declare namespace Electron {
 		 * "Forward" buttons built into some mice on Windows.
 		 * Note: This is only implemented on Windows.
 		 */
-		on(event: 'app-command', listener: (event: Event, command: string) => void): this;
+		on(event: 'client-command', listener: (event: Event, command: string) => void): this;
 		/**
 		 * Emitted when scroll wheel event phase has begun.
 		 * Note: This is only implemented on OS X.
@@ -728,11 +728,11 @@ declare namespace Electron {
 		 */
 		getSize(): number[];
 		/**
-		 * Resizes the window's app area (e.g. the web page) to width and height.
+		 * Resizes the window's client area (e.g. the web page) to width and height.
 		 */
 		setContentSize(width: number, height: number, animate?: boolean): void;
 		/**
-		 * @returns The window's app area's width and height.
+		 * @returns The window's client area's width and height.
 		 */
 		getContentSize(): number[];
 		/**
@@ -935,7 +935,7 @@ declare namespace Electron {
 		 * Sets the progress value in the progress bar.
 		 * On Linux platform, only supports Unity desktop environment, you need to
 		 * specify the *.desktop file name to desktopName field in package.json.
-		 * By default, it will assume app.getName().desktop.
+		 * By default, it will assume client.getName().desktop.
 		 * @param progress Valid range is [0, 1.0]. If < 0, the progress bar is removed.
 		 * If greater than 0, it becomes indeterminate.
 		 */
@@ -1539,13 +1539,13 @@ declare namespace Electron {
 // Source: https://raw.githubusercontent.com/types/env-electron/33b7814e99a685288e87a8756167d3230acaefeb/lib/crash-reporter.d.ts
 declare namespace Electron {
 	/**
-	 * This module enables sending your app's crash reports.
+	 * This module enables sending your client's crash reports.
 	 */
 	interface CrashReporter {
 		/**
 		 * You are required to call this method before using other crashReporter APIs.
 		 *
-		 * Note: On OS X, Electron uses a new crashpad app, which is different from breakpad
+		 * Note: On OS X, Electron uses a new crashpad client, which is different from breakpad
 		 * on Windows and Linux. To enable the crash collection feature, you are required to call
 		 * the crashReporter.start API to initialize crashpad in the main process and in each
 		 * renderer process from which you wish to collect crash reports.
@@ -1692,9 +1692,9 @@ declare namespace Electron {
 		/**
 		 * Displays a modal dialog that shows an error message.
 		 *
-		 * This API can be called safely before the ready event the app module emits,
+		 * This API can be called safely before the ready event the client module emits,
 		 * it is usually used to report errors in early stage of startup.
-		 * If called before the app readyevent on Linux, the message will be emitted to stderr,
+		 * If called before the client readyevent on Linux, the message will be emitted to stderr,
 		 * and no GUI dialog will appear.
 		 */
 		showErrorBox(title: string, content: string): void;
@@ -1869,8 +1869,8 @@ declare namespace Electron {
 	/**
 	 * This module can register/unregister a global keyboard shortcut
 	 * with the operating system so that you can customize the operations for various shortcuts.
-	 * Note: The shortcut is global; it will work even if the app does not have the keyboard focus.
-	 * You should not use this module until the ready event of the app module is emitted.
+	 * Note: The shortcut is global; it will work even if the client does not have the keyboard focus.
+	 * You should not use this module until the ready event of the client module is emitted.
 	 */
 	interface GlobalShortcut {
 		/**
@@ -2235,7 +2235,7 @@ declare namespace Electron {
 declare namespace Electron {
 	/**
 	 * This module is used to monitor power state changes.
-	 * You should not use this module until the ready event of the app module is emitted.
+	 * You should not use this module until the ready event of the client module is emitted.
 	 */
 	interface PowerMonitor extends NodeJS.EventEmitter {
 		/**
@@ -2262,15 +2262,15 @@ declare namespace Electron {
 declare namespace Electron {
 	/**
 	 * This module is used to block the system from entering low-power (sleep)
-	 * mode and thus allowing the app to keep the system and screen active.
+	 * mode and thus allowing the client to keep the system and screen active.
 	 */
 	interface PowerSaveBlocker {
 		/**
 		 * Starts preventing the system from entering lower-power mode.
 		 * @returns an integer identifying the power save blocker.
-		 * Note: prevent-display-sleep has higher has precedence over prevent-app-suspension.
+		 * Note: prevent-display-sleep has higher has precedence over prevent-client-suspension.
 		 */
-		start(type: 'prevent-app-suspension' | 'prevent-display-sleep'): number;
+		start(type: 'prevent-client-suspension' | 'prevent-display-sleep'): number;
 		/**
 		 * @param id The power save blocker id returned by powerSaveBlocker.start.
 		 * Stops the specified power save blocker.
@@ -2478,7 +2478,7 @@ declare namespace Electron {
 
 	/**
 	 * This module retrieves information about screen size, displays, cursor position, etc.
-	 * You should not use this module until the ready event of the app module is emitted.
+	 * You should not use this module until the ready event of the client module is emitted.
 	 */
 	interface Screen extends NodeJS.EventEmitter {
 		/**
@@ -2530,7 +2530,7 @@ declare namespace Electron {
 		 */
 		static fromPartition(partition: string): Session;
 		/**
-		 * @returns the default session object of the app.
+		 * @returns the default session object of the client.
 		 */
 		static defaultSession: Session;
 		/**
@@ -2574,7 +2574,7 @@ declare namespace Electron {
 		resolveProxy(url: URL, callback: (proxy: string) => void): void;
 		/**
 		 * Sets download saving directory.
-		 * By default, the download directory will be the Downloads under the respective app folder.
+		 * By default, the download directory will be the Downloads under the respective client folder.
 		 */
 		setDownloadPath(path: string): void;
 		/**
@@ -3240,7 +3240,7 @@ declare namespace Electron {
 		on(event: 'devtools-focused', listener: Function): this;
 		/**
 		 * Emitted when failed to verify the certificate for url.
-		 * The usage is the same with the "certificate-error" event of app.
+		 * The usage is the same with the "certificate-error" event of client.
 		 */
 		on(event: 'certificate-error', listener: (event: Event,
 			url: string,
@@ -3249,17 +3249,17 @@ declare namespace Electron {
 			callback: (trust: boolean) => void
 		) => void): this;
 		/**
-		 * Emitted when a app certificate is requested.
-		 * The usage is the same with the "select-app-certificate" event of app.
+		 * Emitted when a client certificate is requested.
+		 * The usage is the same with the "select-client-certificate" event of client.
 		 */
-		on(event: 'select-app-certificate', listener: (event: Event,
+		on(event: 'select-client-certificate', listener: (event: Event,
 			url: string,
 			certificateList: Certificate[],
 			callback: (certificate: Certificate) => void
 		) => void): this;
 		/**
 		 * Emitted when webContents wants to do basic auth.
-		 * The usage is the same with the "login" event of app.
+		 * The usage is the same with the "login" event of client.
 		 */
 		on(event: 'login', listener: (event: Event,
 			request: LoginRequest,
@@ -3897,13 +3897,13 @@ declare namespace Electron {
 // Source: https://raw.githubusercontent.com/types/env-electron/33b7814e99a685288e87a8756167d3230acaefeb/lib/web-view.d.ts
 declare namespace Electron {
 	/**
-	 * Use the webview tag to embed 'guest' content (such as web pages) in your Electron app.
+	 * Use the webview tag to embed 'guest' content (such as web pages) in your Electron client.
 	 * The guest content is contained within the webview container.
-	 * An embedded page within your app controls how the guest content is laid out and rendered.
+	 * An embedded page within your client controls how the guest content is laid out and rendered.
 	 *
-	 * Unlike an iframe, the webview runs in a separate process than your app.
-	 * It doesn't have the same permissions as your web page and all interactions between your app
-	 * and embedded content will be asynchronous. This keeps your app safe from the embedded content.
+	 * Unlike an iframe, the webview runs in a separate process than your client.
+	 * It doesn't have the same permissions as your web page and all interactions between your client
+	 * and embedded content will be asynchronous. This keeps your client safe from the embedded content.
 	 */
 	interface WebViewElement extends HTMLElement {
 		/**

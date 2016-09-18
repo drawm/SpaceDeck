@@ -7,13 +7,13 @@ fs.readdirSync('node_modules')
     .forEach(moduleName => nodeModules[moduleName] = 'commonjs ' + moduleName);
 
 module.exports = {
-    entry: ['./src/app/Main.ts'],
+    entry: ['./src/client/Main.ts'],
     devtool: "source-map",
     resolve: {
         extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
-        alias: {
-            fs: './node_modules/'
-        }
+    },
+    node: {
+        net: 'net',
     },
     module: {
         loaders: [
@@ -24,7 +24,7 @@ module.exports = {
         ],
     },
     output: {
-        path: './bin/app/',
+        path: './bin/client/',
         filename: 'app.bundle.js',
     },
     plugins: [
