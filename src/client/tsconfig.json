@@ -1,14 +1,21 @@
 {
-	"compilerOptions": {
-		"outDir": "./../../bin/client/",
-		"sourceMap": true,
-		"module": "commonjs",
-		"target": "es6",
-		"jsx": "react"
-	},
-	"files": [
-		"../../typings/index.d.ts",
-		"./Main.ts",
-		"../shared/IShip.d.ts"
-	]
+  "compilerOptions": {
+    "outDir": "./../../bin/client/",
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "es6",
+    "experimentalDecorators": true,
+    "jsx": "react"
+  },
+  "files": [
+    "../../typings/index.d.ts",
+    "./Main.tsx",
+    "../shared/ship/IShip.d.ts",
+    "../shared/ship/IShipWeapon.d.ts",
+    "../shared/ship/IShipShield.d.ts",
+    "../shared/ship/IShipSensor.d.ts",
+    "../shared/ship/IShipEngine.d.ts",
+    "../shared/ship/IPowerAble.d.ts",
+    "../shared/messages/IMessage.d.ts"
+  ]
 }

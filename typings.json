@@ -1,0 +1,9 @@
+{
+  "globalDevDependencies": {
+    "redux": "registry:dt/redux#3.5.2+20160703092728",
+    "redux-actions": "registry:dt/redux-actions#0.8.0+20160521154116"
+  },
+  "devDependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20160723033700"
+  }
+}

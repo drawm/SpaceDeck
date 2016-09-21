@@ -58,7 +58,7 @@ class Client {
                     .map(JSON.parse);
 
                 messages.forEach((message)=>{
-                    event.sender.send('changeState', message);
+                    event.sender.send('message', message);
                 });
             });
 

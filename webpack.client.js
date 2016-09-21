@@ -7,7 +7,7 @@ fs.readdirSync('node_modules')
     .forEach(moduleName => nodeModules[moduleName] = 'commonjs ' + moduleName);
 
 module.exports = {
-    entry: ['./src/client/Main.ts'],
+    entry: ['./src/client/Main.tsx'],
     devtool: "source-map",
     resolve: {
         extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
@@ -17,7 +17,11 @@ module.exports = {
     },
     module: {
         loaders: [
-            {test: /\.ts?$/, loader: "ts-loader"},
+            {
+                test: /\.tsx?$/,
+                loader: "ts-loader",
+                include: path.join(__dirname, 'src/client')
+            },
         ],
         preLoaders: [
             {test: /\.js?$/, loader: "source-map-loader"},

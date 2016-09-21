@@ -9,8 +9,13 @@
 	"files": [
 		"../../typings/index.d.ts",
 		"./Server.ts",
-		"../shared/IShip.d.ts",
+		"../shared/ship/IShip.d.ts",
 		"../shared/messages/IMessage.d.ts",
-		"../shared/Player.d.ts"
+		"../shared/Player.d.ts",
+		"../shared/ship/IShipWeapon.d.ts",
+		"../shared/ship/IShipShield.d.ts",
+		"../shared/ship/IShipSensor.d.ts",
+		"../shared/ship/IShipEngine.d.ts",
+		"../shared/ship/IPowerAble.d.ts"
 	]
 }

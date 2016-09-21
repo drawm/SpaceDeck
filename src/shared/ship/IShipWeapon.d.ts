@@ -1,0 +1,3 @@
+interface IShipWeapon extends IPowerAble{
+
+}
