@@ -1,6 +1,6 @@
 {
   "name": "spacedeckserver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Space Deck's server",
   "main": "index.js",
   "scripts": {
