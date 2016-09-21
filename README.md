@@ -50,14 +50,23 @@ npm run start
 
 ## Roadmap
 
-- [ ] v0.03 (2016-09-?)
+- [ ] v0.0.4 (2016-10-?)
+    - Add Kalm
+    - Refactor server
+        - Use Channels
+        - Use JSON properly
+    - Barebone control of the ship (Pilot view)
+    - Barebone server side ship management
+        - user input in
+        - ship state out
+- [ ] v0.0.3 (2016-09-?)
     - Add a readme
     - Add a roadmap
     - Experiment with a game engine / rendering pipeline for canvas/webgl
         - Phaser
         - Pixie
         - Babylon
-- [x] v0.02 (2016-09-20)
+- [x] v0.0.2 (2016-09-20)
     - Work on tooling
         - Typescript + typings
         - Webpack
@@ -65,7 +74,7 @@ npm run start
     - Experiment with dataflow lib for the client
         - ~~Redux~~
         - MobX
-- [x] v0.01 (2016-09-18)
+- [x] v0.0.1 (2016-09-18)
     - Basic setup
     - Barebone server with connections and dummy values
     - Barebone client with server's dummy value
