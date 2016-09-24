@@ -60,8 +60,8 @@ npm run start
         - user input in
         - ship state out
 - [ ] v0.0.3 (2016-09-?)
-    - Add a readme
-    - Add a roadmap
+    - ~~Add a readme~~
+    - ~~Add a roadmap~~
     - Experiment with a game engine / rendering pipeline for canvas/webgl
         - Phaser
         - Pixie
