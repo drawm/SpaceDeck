@@ -1,6 +1,14 @@
 import {observable, action} from "mobx";
 
-export default class ShipStore {
+class ShipStore {
+    static instance:ShipStore;
+    constructor(){
+        if(!ShipStore.instance){
+            ShipStore.instance = this;
+        } else {
+            throw new Error('ShipStore is a singleton');
+        }
+    }
 
     @observable
     public x: number = 0;
@@ -12,9 +20,18 @@ export default class ShipStore {
     public rotation: number = 0;
 
     @action
-    update(ship: IShip) {
+    static update(ship: IShip) {
+        if (ship){
+            ShipStore.instance.update(ship);
+        }
+    }
+    private update(ship: IShip) {
         this.x = ship.transform.x;
         this.y = ship.transform.y;
         this.rotation = ship.transform.rotation;
     }
+
 }
+
+
+export default ShipStore;
