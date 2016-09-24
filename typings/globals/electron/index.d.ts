@@ -4224,9 +4224,9 @@ declare namespace Electron {
 		 */
 		addEventListener(type: 'leave-html-full-screen', listener: (event: WebViewElement.Event) => void, useCapture?: boolean): void;
 		/**
-		 * Fired when the guest window logs a console message.
+		 * Fired when the guest window logs a pilot message.
 		 */
-		addEventListener(type: 'console-message', listener: (event: WebViewElement.ConsoleMessageEvent) => void, useCapture?: boolean): void;
+		addEventListener(type: 'pilot-message', listener: (event: WebViewElement.ConsoleMessageEvent) => void, useCapture?: boolean): void;
 		/**
 		 * Fired when a result is available for webview.findInPage request.
 		 */
